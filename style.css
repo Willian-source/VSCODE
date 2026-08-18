@@ -1,27 +1,166 @@
+/* --- CONFIGURAÇÕES GERAIS E CORES --- */
+:root {
+    --bg-primary: #0d1117;
+    --bg-card: #161b22;
+    --bg-card-hover: #1f242d;
+    --text-primary: #e6edf3;
+    --text-secondary: #8b949e;
+    --accent-gold: #d4af37;
+    --border-color: #30363d;
+    
+    /* Cores de Destaque dos Botões */
+    --heart-color: #f78166;
+    --heart-bg: rgba(247, 129, 102, 0.15);
+    --like-color: #58a6ff;
+    --like-bg: rgba(88, 166, 255, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- HEADER --- */
 header {
-            background-color: rgb(41, 38, 38);
-            color: aliceblue;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    text-align: center;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
 
-        main {
-            background-color: rgb(0, 0, 0);
-            color: aliceblue;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 16px;
-        }
+header h1 {
+    color: var(--accent-gold);
+    font-size: 2.2rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        article{
-            display: flex;   
-        }
-        img {
-            width: 80px;
-            height: 80px;
-           }
+header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
 
-           .artigo-autor {
-            font-weight: bold;
-           }
+/* --- CARD DO POST --- */
+main {
+    width: 100%;
+    max-width: 600px;
+}
+
+.post {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.post img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-conteudo {
+    padding: 24px;
+}
+
+.post-conteudo h2 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.artigo-autor {
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.post-conteudo > p {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+/* --- ÁREA DE AÇÕES E BOTÕES DE CURTIR --- */
+.post-acoes {
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 16px;
+}
+
+.post-acoes button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    user-select: none;
+}
+
+.post-acoes button span {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* Efeito Hover nos botões neutros */
+.post-acoes button:hover {
+    background-color: var(--bg-card-hover);
+    color: var(--text-primary);
+    border-color: #8b949e;
+}
+
+/* Efeito de clique no botão (efeito elástico) */
+.post-acoes button:active {
+    transform: scale(0.92);
+}
+
+/* --- ESTADOS ATIVOS (QUANDO O USUÁRIO CURTE) --- */
+
+/* Animação de pulso ao ativar */
+@keyframes curtirPulso {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+/* Estilo do botão de Coração Ativo (.ativo) */
+.post-acoes button.ativo[aria-label*="coração"] {
+    background-color: var(--heart-bg);
+    border-color: var(--heart-color);
+    color: var(--heart-color);
+    animation: curtirPulso 0.3s ease-in-out;
+    box-shadow: 0 0 12px rgba(247, 129, 102, 0.25);
+}
+
+/* Estilo do botão de Joinha Ativo (.ativo) */
+.post-acoes button.ativo[aria-label*="joinha"] {
+    background-color: var(--like-bg);
+    border-color: var(--like-color);
+    color: var(--like-color);
+    animation: curtirPulso 0.3s ease-in-out;
+    box-shadow: 0 0 12px rgba(88, 166, 255, 0.25);
+}
